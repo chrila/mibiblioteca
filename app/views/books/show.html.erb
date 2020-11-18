@@ -1,0 +1,8 @@
+<div class="pt-5">
+  <p><span class="font-weight-bold">Author: </span><%= @book.author %></p>
+  <p><span class="font-weight-bold">Title: </span><%= @book.title %></p>
+  <p><span class="font-weight-bold">Status: </span><%= @book.status.humanize %></p>
+  <p><span class="font-weight-bold">Lend date: </span><%= @book.lend_date %></p>
+  <p><span class="font-weight-bold">Return date: </span><%= @book.return_date %></p>
+</div>
+<%= link_to '<< Back', books_path %>

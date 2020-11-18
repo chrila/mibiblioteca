@@ -1,13 +1,29 @@
+<p>
+  <%= notice %>
+</p>
+
+<%= search_form_for @q do |f| %>
+  <%= f.label :status %>
+  <%= f.select :status_eq,
+    Book.statuses.to_a.map { |w| [w[0].humanize, w[1]] },
+    include_blank: true,
+    class: "form-control"
+  %>
+  <%= f.submit %>
+<% end %>
+
 <table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">id</th>
-      <th scope="col">title</th>
-      <th scope="col">author</th>
-      <th scope="col">status</th>
-      <th scope="col">lend_date</th>
-      <th scope="col">return_date</th>
-      <th scope="col">actions</th>
+      <th scope="col"><%= sort_link(@q, :title) %></th>
+      <th scope="col">Author</th>
+      <th scope="col">Status</th>
+      <th scope="col">Lent on</th>
+      <th scope="col">Returned on</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -16,11 +32,14 @@
         <th scope="row"><%= book.id %></th>
         <td><%= book.title %></td>
         <td><%= book.author %></td>
-        <td><%= book.status %></td>
+        <td><%= book.status.humanize %></td>
         <td><%= book.lend_date %></td>
         <td><%= book.return_date %></td>
-        <td>show edit delete</td>
+        <td><%= link_to 'Show', book %></td>
+        <td><%= link_to 'Edit', edit_book_path(book) %></td>
+        <td><%= link_to 'Delete', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%= link_to 'New book...', new_book_path, class: 'btn btn-primary' %>

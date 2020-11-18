@@ -3,5 +3,5 @@ class Book < ApplicationRecord
   validates :author, presence: true
   validates :status, presence: true
 
-  enum status [:lent, :in_shelf]
+  enum status: [:lent, :in_shelf]
 end
