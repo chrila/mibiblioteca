@@ -1,19 +1,21 @@
 require 'test_helper'
 
 class BooksControllerTest < ActionDispatch::IntegrationTest
-  test "should get edit" do
-    get books_edit_url
+  test 'get books' do
+    get books_path
     assert_response :success
+    assert_not_nil assigns(:books)
   end
 
-  test "should get index" do
-    get books_index_url
-    assert_response :success
+  test 'book create' do
+    params = {
+      title: "Ruby 101",
+      author: "Jane Doe",
+      status: 'in_shelf',
+      lend_date: DateTime.now,
+      return_date: DateTime.now
+    }
+    post books_url, params: { book: params }
+    assert_response :found
   end
-
-  test "should get new" do
-    get books_new_url
-    assert_response :success
-  end
-
 end
